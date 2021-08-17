@@ -9,9 +9,9 @@ function AnimalList() {
   const animals = [
     {species: 'Sloth', name: 'Sid', dateOfBirth: new Date()},
     {species: 'Penguin', name: 'Ricko', dateOfBirth: new Date()},
-    {species: 'Lion', name: 'Simba', dateOfBirth: new Date()},
+    {species: 'Lion', name: 'Simba', dateOfBirth: ''},
     {species: 'Elephant', name: 'Dumbo', dateOfBirth: new Date()},
-    {species: 'Giraffe', name: 'Melvin', dateOfBirth: new Date()},
+    {species: 'Giraffe', name: 'Melvin', dateOfBirth: ''},
   ];
 
   return (    
@@ -20,10 +20,10 @@ function AnimalList() {
       <table>
         <tr>
           <th>
-            Species
+            Name
           </th>
           <th>
-            Name
+            Species
           </th>
           <th>
             Date of birth
@@ -31,9 +31,9 @@ function AnimalList() {
         </tr>
         {animals.map((animal, index) => (
           <tr>
-            <td key={index}>{animal.species}</td>
+            {animal.species && <td key={index}>{animal.species}</td>}
             <td key={index}>{animal.name}</td>
-            <td key={index}>{animal.dateOfBirth.toLocaleDateString()}</td>
+            {animal.dateOfBirth ? <td key={index}>{animal.dateOfBirth.toLocaleDateString()}</td> : <td>Unknown</td>}
           </tr>
         ))}
         
