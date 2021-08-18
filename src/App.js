@@ -7,6 +7,14 @@ function App() {
 }
 
 function AnimalList() {
+  
+  const [newAnimal, setNewAnimal] = useState([
+    {
+      species: '', 
+      name: '', 
+      dateOfBirth: ''
+    }
+  ])
 
   const [animals, setAnimals] = useState([
     {species: 'Sloth', name: 'Sid', dateOfBirth: new Date()},
@@ -24,8 +32,46 @@ function AnimalList() {
     setAnimals([animals[animalIndex], ...animals.slice(0, animalIndex), ...animals.slice(animalIndex + 1)])
   }
 
+  const handleSpeciesChange = (e) => {
+    setNewAnimal({
+      ...newAnimal,
+      species: e.target.value
+    })
+  }
+
+  const handleNameChange = (e) => {
+    setNewAnimal({
+      ...newAnimal,
+      name: e.target.value
+    })
+  }
+
+  const handleDateOfBirthChange = (e) => {
+    setNewAnimal({
+      ...newAnimal,
+      dateOfBirth: new Date(e.target.value)
+    })
+  }
+
+  const addAnimal = (e) => {
+    e.preventDefault();
+
+    setAnimals([...animals, newAnimal])
+    setNewAnimal({
+      species: '',
+      name: '',
+      dateOfBirth: '',
+    })
+  }
+
   return (    
     <div>
+      <form onSubmit={addAnimal}>
+        <input type="text" placeholder="Species" value={newAnimal.species} onChange={handleSpeciesChange}/>
+        <input type="text" placeholder="Name" value={newAnimal.name} onChange={handleNameChange}/>
+        <input type="text" placeholder="Date of birth" value={newAnimal.dateOfBirth} onChange={handleDateOfBirthChange}/>
+        <button>Add Animal</button>
+      </form>
       <h1>Animals</h1>
       <table>
         <tr>
@@ -48,9 +94,6 @@ function AnimalList() {
             <button onClick={() => moveToTop(index)}>Move to the top</button>
           </tr>
         ))}
-        <tr>
-          
-        </tr>
       </table>
     </div>
   )
