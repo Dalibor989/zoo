@@ -8,11 +8,14 @@ function App() {
 
 function AnimalList() {
   
+  const sectors = ['Canine', 'Feline', 'Avian', 'Herbivore']
+
   const [newAnimal, setNewAnimal] = useState([
     {
       species: '', 
       name: '', 
-      dateOfBirth: ''
+      dateOfBirth: '',
+      sector: sectors[0]
     }
   ])
 
@@ -53,6 +56,13 @@ function AnimalList() {
     })
   }
 
+  const handleSectorChange = (e) => {
+    setNewAnimal({
+      ...newAnimal,
+      sector: e.target.value
+    })
+  }
+
   const addAnimal = (e) => {
     e.preventDefault();
 
@@ -66,13 +76,21 @@ function AnimalList() {
 
   return (    
     <div>
-      <form onSubmit={addAnimal}>
-        <input type="text" placeholder="Species" value={newAnimal.species} onChange={handleSpeciesChange}/>
-        <input type="text" placeholder="Name" value={newAnimal.name} onChange={handleNameChange}/>
-        <input type="text" placeholder="Date of birth" value={newAnimal.dateOfBirth} onChange={handleDateOfBirthChange}/>
-        <button>Add Animal</button>
-      </form>
       <h1>Animals</h1>
+      
+      <div>
+      <form onSubmit={addAnimal}>
+        <input type="text" placeholder="Species" value={newAnimal.species} onChange={handleSpeciesChange}/><br />
+        <input type="text" placeholder="Name" value={newAnimal.name} onChange={handleNameChange}/><br />
+        <input type="text" placeholder="Date of birth" value={newAnimal.dateOfBirth} onChange={handleDateOfBirthChange}/><br />
+        <select name="sector" onChange={handleSectorChange} value={newAnimal.sector}>
+          {sectors.map((sector, index) => <option  key={index} value={sector}>{sector}</option>)}
+        </select><br />
+        <button>Add Animal</button><br />
+      </form>
+      </div>
+      
+      <div>
       <table>
         <tr>
           <th>
@@ -84,17 +102,22 @@ function AnimalList() {
           <th>
             Date of birth
           </th>
+          <th>
+            Sector
+          </th>
         </tr>
         {animals.map((animal, index) => (
           <tr>
             <td key={index}>{animal.species}</td>
             <td key={index}>{animal.name}</td>
             {animal.dateOfBirth ? <td key={index}>{animal.dateOfBirth.toLocaleDateString()}</td> : <td>Unknown</td>}
+            <td key={index}>{animal.sector ? animal.sector : 'Nepoznat'}</td>
             <button onClick={() => remove(index)}>Remove</button>
             <button onClick={() => moveToTop(index)}>Move to the top</button>
           </tr>
         ))}
       </table>
+      </div>
     </div>
   )
 }
