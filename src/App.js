@@ -116,8 +116,8 @@ function AnimalList() {
           <tr>
             <td key={index}>{animal.species}</td>
             <td key={index}>{animal.name}</td>
-            {animal.dateOfBirth ? <td key={index}>{animal.dateOfBirth.toLocaleDateString()}</td> : <td>Unknown</td>}
-            <td key={index}>{animal.sector ? animal.sector : 'Nepoznat'}</td>
+            <td key={index}>{animal.dateOfBirth ? animal.dateOfBirth.toLocaleDateString() : 'Unknown'}</td>
+            <td key={index}>{animal.sector ? animal.sector : 'Unknown'}</td>
             <button onClick={() => remove(index)}>Remove</button>
             <button onClick={() => moveToTop(index)}>Move to the top</button>
           </tr>
