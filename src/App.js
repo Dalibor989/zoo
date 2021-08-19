@@ -15,7 +15,7 @@ function AnimalList() {
       species: '', 
       name: '', 
       dateOfBirth: '',
-      sector: sectors[0]
+      sector: ''
     }
   ])
 
@@ -82,9 +82,9 @@ function AnimalList() {
 
   return (    
     <div>
-      <h1>Animals</h1>
+      <h1 className="form-div">Animals</h1>
       
-      <div>
+      <div className="form-div">
       <form onSubmit={addAnimal}>
         <input type="text" placeholder="Species" value={newAnimal.species} onChange={handleSpeciesChange}/><br />
         <input type="text" placeholder="Name" value={newAnimal.name} onChange={handleNameChange}/><br />
