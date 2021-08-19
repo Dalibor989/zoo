@@ -74,6 +74,12 @@ function AnimalList() {
     })
   }
 
+  const checkAnimals = (sector) => {
+    const animalsInSector = animals.filter((animal) => animal.sector === sector)
+
+    alert(JSON.stringify(animalsInSector))
+  }
+
   return (    
     <div>
       <h1>Animals</h1>
@@ -114,6 +120,20 @@ function AnimalList() {
             <td key={index}>{animal.sector ? animal.sector : 'Nepoznat'}</td>
             <button onClick={() => remove(index)}>Remove</button>
             <button onClick={() => moveToTop(index)}>Move to the top</button>
+          </tr>
+        ))}
+      </table>
+
+      <table>
+        <tr>
+          <th>
+            Sector
+          </th>
+        </tr>
+        {sectors.map((sector, index) => (
+          <tr key={index}>
+            <td >{sector}</td>
+            <button onClick={() => checkAnimals(sector)}>Check Animals</button>
           </tr>
         ))}
       </table>
